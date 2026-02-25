@@ -1,0 +1,13 @@
+/* App styles */
+
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #64748b;
+  --success-color: #16a34a;
+  --warning-color: #ea580c;
+  --error-color: #dc2626;
+}
+
+main {
+  flex: 1;
+}
