@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import Navbar from './components/common/Navbar';
 
 // Component ported from https://codepen.io/JuanFuentes/full/rgXKGQ
 // Font used - https://compressa.preusstype.com/
@@ -68,6 +69,7 @@ function App() {
   return (
     <Router>
       <AuthProvider>
+        <Navbar />
         <AppContent />
       </AuthProvider>
     </Router>

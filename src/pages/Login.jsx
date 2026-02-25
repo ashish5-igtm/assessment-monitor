@@ -68,7 +68,7 @@ export default function Login() {
               placeholder="you@school.edu"
               disabled={loading}
             />
-            <p className="mt-1 text-xs text-gray-500">Try: teacher@school.edu</p>
+            
           </div>
 
           <div>
@@ -83,7 +83,7 @@ export default function Login() {
               placeholder="••••••••"
               disabled={loading}
             />
-            <p className="mt-1 text-xs text-gray-500">Try: teacher123</p>
+            
           </div>
 
           <button
@@ -95,19 +95,6 @@ export default function Login() {
           </button>
         </form>
 
-        <div className="pt-4 border-t">
-          <p className="text-xs text-center text-gray-600 mb-3">Demo Credentials:</p>
-          <div className="space-y-2 text-xs">
-            <div className="p-2 bg-blue-50 rounded">
-              <p className="font-medium text-gray-900">Teacher</p>
-              <p className="text-gray-600">teacher@school.edu / teacher123</p>
-            </div>
-            <div className="p-2 bg-green-50 rounded">
-              <p className="font-medium text-gray-900">Student</p>
-              <p className="text-gray-600">student@school.edu / student123</p>
-            </div>
-          </div>
-        </div>
 
       </div>
     </div>
