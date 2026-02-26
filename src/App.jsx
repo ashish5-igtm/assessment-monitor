@@ -1,10 +1,7 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
-import Navbar from './components/common/Navbar';
-
-// Component ported from https://codepen.io/JuanFuentes/full/rgXKGQ
-// Font used - https://compressa.preusstype.com/
 
 // Page Imports
 import Login from './pages/Login';
@@ -18,10 +15,7 @@ function AppContent() {
   return (
     <Routes>
       {/* Public Route */}
-      <Route 
-        path="/" 
-        element={<Login />} 
-      />
+      <Route path="/" element={<Login />} />
 
       {/* 👨‍🏫 Teacher Routes - Protected */}
       <Route 
@@ -67,12 +61,11 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <Navbar />
+    <AuthProvider>
+      <Router>
         <AppContent />
-      </AuthProvider>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 

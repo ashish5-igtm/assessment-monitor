@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import Card from '../../components/common/Card';
 import Badge from '../../components/common/Badge';
-import { LogoutButton } from '../../components/LogoutButton';
 import BarChart from '../../components/charts/BarChart';
 import { assessmentService } from '../../services/assessmentService';
 import { formatDate, calculatePercentage, getScoreColor } from '../../utils/helpers';
@@ -54,7 +53,6 @@ export default function StudentDashboard() {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 border-b flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-900">Student Dashboard</h1>
-        <LogoutButton />
       </div>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

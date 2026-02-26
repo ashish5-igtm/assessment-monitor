@@ -1,0 +1,56 @@
+:root{
+  --login-bg-top: #f8fafc;
+  --login-bg-bottom: #eef2ff;
+  --card-bg: #ffffff;
+  --accent: #2563eb;
+  --accent-dark: #1e40af;
+  --muted: #6b7280;
+}
+
+.login-hero{
+  background: linear-gradient(180deg,var(--login-bg-top),var(--login-bg-bottom));
+}
+
+.login-card{
+  background: var(--card-bg);
+  border: 1px solid rgba(15,23,42,0.04);
+}
+
+.login-title{
+  letter-spacing: -0.02em;
+}
+
+.login-desc{
+  color: var(--muted);
+}
+
+.login-error{
+  animation: pulse 400ms ease-in-out;
+}
+
+.login-input{
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+
+.login-input:focus{
+  box-shadow: 0 0 0 4px rgba(37,99,235,0.08);
+  border-color: var(--accent);
+}
+
+.login-button{
+  background: var(--accent);
+}
+
+.login-button:hover{
+  background: var(--accent-dark);
+}
+
+@keyframes pulse{
+  0%{opacity:0.92;transform:translateY(-2px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+
+@media (max-width:640px){
+  .login-card{padding:1.25rem}
+  .login-title{font-size:1.5rem}
+}

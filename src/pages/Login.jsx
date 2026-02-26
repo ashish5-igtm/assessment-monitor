@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,18 +40,18 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+    <div className="login-hero flex items-center justify-center min-h-screen">
+      <div className="login-card w-full max-w-md p-8 space-y-6 rounded-lg shadow-md">
         
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Assessment Monitor</h1>
-          <p className="mt-2 text-sm text-gray-600">
+          <h1 className="login-title text-3xl font-bold text-gray-900">Assessment Monitor</h1>
+          <p className="login-desc mt-2 text-sm text-gray-600">
             Sign in to track learning outcomes and progress.
           </p>
         </div>
 
         {error && (
-          <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-md text-sm">
+          <div className="login-error p-3 bg-red-100 border border-red-400 text-red-700 rounded-md text-sm">
             {error}
           </div>
         )}
@@ -64,7 +65,7 @@ export default function Login() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="login-input w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               placeholder="you@school.edu"
               disabled={loading}
             />
@@ -79,7 +80,7 @@ export default function Login() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="login-input w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               placeholder="••••••••"
               disabled={loading}
             />
@@ -89,7 +90,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+            className="login-button w-full px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>

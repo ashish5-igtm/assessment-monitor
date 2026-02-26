@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import Card from '../../components/common/Card';
-import { LogoutButton } from '../../components/LogoutButton';
+
 import { assessmentService } from '../../services/assessmentService';
 
 export default function AddAssessment() {
@@ -51,7 +51,6 @@ export default function AddAssessment() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 border-b flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-900">Add Assessment</h1>
-        <LogoutButton />
       </div>
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

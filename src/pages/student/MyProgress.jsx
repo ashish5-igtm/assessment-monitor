@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import Card from '../../components/common/Card';
-import { LogoutButton } from '../../components/LogoutButton';
+
 import PieChart from '../../components/charts/PieChart';
 import { assessmentService } from '../../services/assessmentService';
 import { formatDate, calculatePercentage } from '../../utils/helpers';
@@ -72,7 +72,6 @@ export default function MyProgress() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 border-b flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-900">My Progress</h1>
-        <LogoutButton />
       </div>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
