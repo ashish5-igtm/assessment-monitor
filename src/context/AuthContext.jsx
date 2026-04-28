@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { studentService } from '../services/studentService';
+import { teacherService } from '../services/teacherService';
 
 const AuthContext = createContext();
 
@@ -23,15 +24,16 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    // Keep teacher mock for demonstration
-    if (email === 'teacher@school.edu' && password === 'teacher123') {
-      const userData = { email, role: 'teacher', name: 'Teacher' };
+    try {
+      const teacherData = await teacherService.loginTeacher({ email, password });
+      const userData = { email: teacherData.email, role: 'teacher', name: teacherData.name };
       setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
       return userData;
+    } catch {
+      // Fall through to student login when teacher auth does not match.
     }
-    
-    // Authenticate student via backend
+
     const studentData = await studentService.loginStudent({ email, password });
     const userData = { email: studentData.email, role: 'student', name: studentData.name };
     setUser(userData);

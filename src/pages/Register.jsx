@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { studentService } from '../services/studentService';
+import { teacherService } from '../services/teacherService';
 
 export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('student');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -20,7 +22,11 @@ export default function Register() {
       if (!email) throw new Error('Please enter an email address');
       if (!password || password.length < 6) throw new Error('Password must be at least 6 characters');
 
-      await studentService.registerStudent({ name, email, password });
+      if (role === 'teacher') {
+        await teacherService.registerTeacher({ name, email, password });
+      } else {
+        await studentService.registerStudent({ name, email, password });
+      }
       
       // Navigate to login after successful register
       navigate('/login');
@@ -36,9 +42,9 @@ export default function Register() {
       <div className="login-card w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md border border-gray-100">
         
         <div className="text-center">
-          <h1 className="login-title text-3xl font-bold text-gray-900">Student Registration</h1>
+          <h1 className="login-title text-3xl font-bold text-gray-900">Account Registration</h1>
           <p className="login-desc mt-2 text-sm text-gray-600">
-            Create an account to track your assessments!
+            Create a student or teacher account to use the platform.
           </p>
         </div>
 
@@ -49,6 +55,21 @@ export default function Register() {
         )}
 
         <form onSubmit={handleRegister} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Register As
+            </label>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="login-input w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              disabled={loading}
+            >
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+            </select>
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Full Name
@@ -96,7 +117,7 @@ export default function Register() {
             disabled={loading}
             className="login-button w-full px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
           >
-            {loading ? 'Registering...' : 'Register as Student'}
+            {loading ? 'Registering...' : `Register as ${role === 'teacher' ? 'Teacher' : 'Student'}`}
           </button>
         </form>
 

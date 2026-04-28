@@ -1,12 +1,12 @@
 package com.assessment.monitor.repository;
 
-import com.assessment.monitor.model.Admin;
+import com.assessment.monitor.model.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, Long> {
-    Optional<Admin> findByEmail(String email);
+public interface TeacherRepository extends JpaRepository<Teacher, Long> {
+    Optional<Teacher> findByEmail(String email);
 }
