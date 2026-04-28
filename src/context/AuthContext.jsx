@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { studentService } from '../services/studentService';
 
 const AuthContext = createContext();
 
@@ -21,20 +22,18 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  // Mock user database
-  const users = [
-    { email: 'teacher@school.edu', password: 'teacher123', role: 'teacher', name: 'Teacher' },
-    { email: 'student@school.edu', password: 'student123', role: 'student', name: 'Student' }
-  ];
-
-  const login = (email, password) => {
-    const foundUser = users.find(u => u.email === email && u.password === password);
-    
-    if (!foundUser) {
-      throw new Error('Invalid email or password');
+  const login = async (email, password) => {
+    // Keep teacher mock for demonstration
+    if (email === 'teacher@school.edu' && password === 'teacher123') {
+      const userData = { email, role: 'teacher', name: 'Teacher' };
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+      return userData;
     }
-
-    const userData = { email: foundUser.email, role: foundUser.role, name: foundUser.name };
+    
+    // Authenticate student via backend
+    const studentData = await studentService.loginStudent({ email, password });
+    const userData = { email: studentData.email, role: 'student', name: studentData.name };
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
     return userData;

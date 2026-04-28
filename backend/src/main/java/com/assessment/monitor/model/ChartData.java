@@ -13,7 +13,7 @@ public class ChartData {
     @Column(name = "label", nullable = false)
     private String label;
 
-    @Column(name = "value", nullable = false)
+    @Column(name = "metric_value", nullable = false)
     private Double value;
 
     public ChartData() {}

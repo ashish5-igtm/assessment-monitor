@@ -5,8 +5,10 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 
 // Page Imports
 import Login from './pages/Login';
+import Register from './pages/Register';
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import AddAssessment from './pages/teacher/AddAssessment';
+import ViewStudents from './pages/teacher/ViewStudents';
 import StudentDashboard from './pages/student/StudentDashboard';
 import MyProgress from './pages/student/MyProgress';
 
@@ -16,6 +18,8 @@ function AppContent() {
     <Routes>
       {/* Public Route */}
       <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
       {/* 👨‍🏫 Teacher Routes - Protected */}
       <Route 
@@ -23,6 +27,14 @@ function AppContent() {
         element={
           <ProtectedRoute requiredRole="teacher">
             <TeacherDashboard />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/teacher/students" 
+        element={
+          <ProtectedRoute requiredRole="teacher">
+            <ViewStudents />
           </ProtectedRoute>
         } 
       />

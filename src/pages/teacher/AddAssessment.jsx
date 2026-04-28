@@ -8,6 +8,7 @@ import { assessmentService } from '../../services/assessmentService';
 export default function AddAssessment() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [pdfFile, setPdfFile] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     subject: '',
@@ -28,13 +29,27 @@ export default function AddAssessment() {
     }));
   };
 
+  const handleFileChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setPdfFile(e.target.files[0]);
+    } else {
+      setPdfFile(null);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       const result = await assessmentService.createAssessment(formData);
-      console.log('Assessment created:', result);
+      
+      // If there's a file attached, upload it
+      if (pdfFile && result.id) {
+        await assessmentService.uploadAssessmentPdf(result.id, pdfFile);
+      }
+
+      console.log('Assessment created successfully');
       alert('Assessment created successfully!');
       navigate('/teacher/dashboard');
     } catch (error) {
@@ -103,6 +118,19 @@ export default function AddAssessment() {
                 rows="4"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Assessment description and instructions"
+              />
+            </div>
+
+            {/* PDF File Upload */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Attach PDF Document (Optional)
+              </label>
+              <input
+                type="file"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white cursor-pointer file:cursor-pointer file:border-0 file:bg-blue-50 file:text-blue-700 file:font-semibold file:mr-4 file:py-2 file:rounded-md hover:file:bg-blue-100 transition"
               />
             </div>
 
@@ -180,6 +208,7 @@ export default function AddAssessment() {
                 <li>• <strong>Questions:</strong> {formData.questions}</li>
                 <li>• <strong>Time Limit:</strong> {formData.timeLimit} minutes</li>
                 <li>• <strong>Total Points:</strong> {formData.totalPoints}</li>
+                <li>• <strong>Attachment:</strong> {pdfFile ? pdfFile.name : 'None'}</li>
               </ul>
             </div>
 

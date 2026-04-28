@@ -1,37 +1,29 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { studentService } from '../services/studentService';
 
-
-export default function Login() {
+export default function Register() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { login } = useAuth();
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
     try {
-      if (!email) {
-        throw new Error('Please enter an email');
-      }
-      if (!password) {
-        throw new Error('Please enter a password');
-      }
+      if (!name) throw new Error('Please enter your full name');
+      if (!email) throw new Error('Please enter an email address');
+      if (!password || password.length < 6) throw new Error('Password must be at least 6 characters');
 
-      const user = await login(email, password);
-
-      // Redirect based on role
-      if (user.role === 'teacher') {
-        navigate('/teacher/dashboard');
-      } else {
-        navigate('/student/dashboard');
-      }
+      await studentService.registerStudent({ name, email, password });
+      
+      // Navigate to login after successful register
+      navigate('/login');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -40,13 +32,13 @@ export default function Login() {
   };
 
   return (
-    <div className="login-hero flex items-center justify-center min-h-screen">
-      <div className="login-card w-full max-w-md p-8 space-y-6 rounded-lg shadow-md">
+    <div className="login-hero flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="login-card w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md border border-gray-100">
         
         <div className="text-center">
-          <h1 className="login-title text-3xl font-bold text-gray-900">Assessment Monitor</h1>
+          <h1 className="login-title text-3xl font-bold text-gray-900">Student Registration</h1>
           <p className="login-desc mt-2 text-sm text-gray-600">
-            Sign in to track learning outcomes and progress.
+            Create an account to track your assessments!
           </p>
         </div>
 
@@ -56,7 +48,21 @@ export default function Login() {
           </div>
         )}
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleRegister} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Full Name
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="login-input w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Your Full Name"
+              disabled={loading}
+            />
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email Address
@@ -69,7 +75,6 @@ export default function Login() {
               placeholder="you@school.edu"
               disabled={loading}
             />
-            
           </div>
 
           <div>
@@ -84,7 +89,6 @@ export default function Login() {
               placeholder="••••••••"
               disabled={loading}
             />
-            
           </div>
 
           <button
@@ -92,15 +96,15 @@ export default function Login() {
             disabled={loading}
             className="login-button w-full px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'Registering...' : 'Register as Student'}
           </button>
         </form>
 
         <div className="text-center mt-4">
           <p className="text-sm text-gray-600">
-            Don't have an account?{' '}
-            <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
-              Register here
+            Already have an account?{' '}
+            <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
+              Log in instead
             </Link>
           </p>
         </div>

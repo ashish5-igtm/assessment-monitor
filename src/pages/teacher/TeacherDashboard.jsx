@@ -146,9 +146,9 @@ export default function TeacherDashboard() {
                 >
                   + Create Assessment
                 </Link>
-                <button className="w-full px-4 py-3 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition font-medium">
+                <Link to="/teacher/students" className="block w-full px-4 py-3 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition font-medium text-center">
                   View All Students
-                </button>
+                </Link>
                 <button className="w-full px-4 py-3 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition font-medium">
                   Export Results
                 </button>
