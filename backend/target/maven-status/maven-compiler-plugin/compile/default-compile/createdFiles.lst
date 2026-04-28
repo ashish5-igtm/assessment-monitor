@@ -1,0 +1,11 @@
+com\assessment\monitor\repository\StudentRepository.class
+com\assessment\monitor\controller\ChartDataController.class
+com\assessment\monitor\controller\StudentController.class
+com\assessment\monitor\repository\ChartDataRepository.class
+com\assessment\monitor\model\Student.class
+com\assessment\monitor\model\Assessment.class
+com\assessment\monitor\config\WebConfig.class
+com\assessment\monitor\model\ChartData.class
+com\assessment\monitor\MonitorApplication.class
+com\assessment\monitor\controller\AssessmentController.class
+com\assessment\monitor\repository\AssessmentRepository.class
